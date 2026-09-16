@@ -27,63 +27,59 @@ body {
   color: var(--ink);
   background: var(--soft);
   font-family: 'KkuBulLim', -apple-system, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
-  font-weight: 400;
   overscroll-behavior-y: none;
 }
 button { font: inherit; }
 button:focus-visible { outline: 3px solid #17212b; outline-offset: 3px; }
-
 .app-shell {
   width: 100%;
   max-width: 480px;
   min-height: 100vh;
   min-height: 100dvh;
   margin: 0 auto;
-  padding: max(18px, env(safe-area-inset-top)) 22px calc(104px + env(safe-area-inset-bottom));
+  padding: max(18px, env(safe-area-inset-top)) 22px calc(96px + env(safe-area-inset-bottom));
   background: var(--paper);
 }
 .screen { animation: screen-in .22s ease both; }
 .screen[hidden] { display: none; }
 @keyframes screen-in { from { opacity: 0; transform: translateY(5px); } }
-
 .top-header, .calendar-header { display: flex; align-items: center; justify-content: space-between; }
 h1, h2, p { margin: 0; }
 h1 { font-size: clamp(31px, 9vw, 39px); line-height: 1; letter-spacing: -1.4px; font-weight: 800; }
 h2 { font-size: 34px; line-height: 1; font-weight: 800; }
 .today-date { margin-top: 9px; color: var(--muted); font-size: 16px; }
 .eyebrow { margin-bottom: 7px; color: var(--brand); font-size: 14px; }
-.brand-drop { width: 42px; height: 52px; background: var(--brand); border-radius: 55% 45% 58% 42% / 66% 45% 55% 34%; transform: rotate(45deg); }
-.brand-drop.small { width: 34px; height: 42px; }
-
-.glass-area { margin-top: 20px; }
-.glass-wrap { position: relative; width: 172px; margin: 0 auto; }
-.glass { display: block; width: 100%; overflow: visible; filter: drop-shadow(0 7px 5px rgba(33, 60, 74, .1)); }
-.glass-body { fill: rgba(225, 243, 250, .2); stroke: #45616f; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
-.glass-rim { fill: rgba(241, 250, 253, .9); stroke: #45616f; stroke-width: 5; }
+.category-heading { display: flex; align-items: baseline; justify-content: space-between; margin-top: 24px; }
+.category-heading strong { font-size: 27px; }
+.category-heading span { color: var(--muted); font-size: 12px; }
+.category-screen.water .category-heading strong { color: var(--water); }
+.category-screen.coffee .category-heading strong { color: var(--coffee); }
+.category-screen.tea .category-heading strong { color: var(--tea); }
+.cups-area { margin-top: 13px; }
+.cups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 10px; align-items: end; }
+.cup-item { min-width: 0; text-align: center; }
+.cup-item .glass { display: block; width: min(100%, 172px); margin: auto; overflow: visible; filter: drop-shadow(0 7px 5px rgba(33,60,74,.1)); }
+.cup-item span { display: inline-block; margin-top: -3px; color: var(--muted); font-size: 12px; }
+.glass-body { fill: rgba(225,243,250,.2); stroke: #45616f; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+.glass-rim { fill: rgba(241,250,253,.9); stroke: #45616f; stroke-width: 5; }
 .glass-base { fill: none; stroke: #45616f; stroke-width: 7; stroke-linecap: round; }
-.glass-shine { fill: none; stroke: rgba(255, 255, 255, .8); stroke-width: 7; stroke-linecap: round; }
-.fill-segment { fill: transparent; transition: fill .25s ease, opacity .25s ease; opacity: 0; stroke: rgba(255,255,255,.38); stroke-width: 2; }
+.glass-shine { fill: none; stroke: rgba(255,255,255,.8); stroke-width: 7; stroke-linecap: round; }
+.fill-segment { fill: currentColor; opacity: 0; stroke: rgba(255,255,255,.42); stroke-width: 2; transition: height .25s ease, y .25s ease, opacity .25s ease; }
 .fill-segment.filled { opacity: .95; animation: fill-pop .28s ease-out; }
 @keyframes fill-pop { from { opacity: .15; transform: translateY(12px); } }
-.quarter-label { position: absolute; right: -10px; top: 49%; padding: 5px 8px; border-radius: 20px; color: #45616f; background: #eef5f7; font-size: 11px; transform: rotate(-3deg); }
-
-.totals { margin-top: 4px; }
-.category-totals { display: flex; justify-content: center; flex-wrap: wrap; gap: 6px 13px; min-height: 24px; font-size: 15px; }
-.total-water { color: var(--water); }.total-coffee { color: var(--coffee); }.total-tea { color: var(--tea); }
-.goal-line { display: flex; justify-content: space-between; align-items: baseline; max-width: 330px; margin: 13px auto 7px; font-size: 15px; }
-.goal-line strong { color: var(--brand); font-size: 17px; }
-.goal-track { max-width: 330px; height: 9px; margin: auto; overflow: hidden; background: #e7edef; border-radius: 99px; }
-#goal-progress { width: 0; height: 100%; background: var(--brand); border-radius: inherit; transition: width .35s ease; }
-
-.drink-actions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 24px; }
-.drink-button { min-height: 82px; padding: 12px 5px; border: 0; border-radius: 18px; color: white; cursor: pointer; box-shadow: 0 5px 0 rgba(28, 37, 42, .14); transition: transform .1s ease, box-shadow .1s ease; }
-.drink-button.water { background: var(--water); }.drink-button.coffee { background: var(--coffee); }.drink-button.tea { background: var(--tea); }
-.drink-button span { display: block; font-size: 23px; font-weight: 800; }
+.category-total { margin: 14px 0 0; text-align: center; font-size: 25px; font-weight: 800; }
+.category-screen.water .category-total { color: var(--water); }
+.category-screen.coffee .category-total { color: var(--coffee); }
+.category-screen.tea .category-total { color: var(--tea); }
+.drink-button { display: block; width: 100%; min-height: 76px; margin-top: 22px; padding: 12px; border: 0; border-radius: 18px; color: white; cursor: pointer; box-shadow: 0 5px 0 rgba(28,37,42,.14); transition: transform .1s ease, box-shadow .1s ease; }
+.drink-button.water { background: var(--water); }
+.drink-button.coffee { background: var(--coffee); }
+.drink-button.tea { background: var(--tea); }
+.drink-button span { display: block; font-size: 21px; font-weight: 800; }
 .drink-button small { display: block; margin-top: 4px; font-size: 12px; opacity: .9; }
-.drink-button:active, .drink-button.popping { transform: translateY(4px) scale(.95); box-shadow: 0 1px 0 rgba(28,37,42,.14); }
-.undo-button { display: block; margin: 16px auto 0; padding: 8px 12px; border: 0; color: var(--muted); background: transparent; font-size: 13px; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.drink-button:active, .drink-button.popping { transform: translateY(4px) scale(.98); box-shadow: 0 1px 0 rgba(28,37,42,.14); }
+.undo-button { display: block; margin: 15px auto 0; padding: 8px 12px; border: 0; color: var(--muted); background: transparent; font-size: 13px; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
 .undo-button:disabled { opacity: .32; cursor: default; }
-
 .calendar-header { margin-bottom: 25px; }
 .month-nav { display: grid; grid-template-columns: 70px 1fr 70px; align-items: center; margin-bottom: 18px; }
 .month-nav strong { text-align: center; font-size: 21px; }
@@ -103,21 +99,22 @@ h2 { font-size: 34px; line-height: 1; font-weight: 800; }
 .key-ring { width: 17px; height: 17px; border: 3px solid var(--brand); border-radius: 50%; }
 .key-dot { width: 6px; height: 6px; margin-left: 9px; border-radius: 50%; background: var(--water); }
 .day-detail { margin-top: 16px; padding: 15px 17px; border-radius: 16px; background: #f0f5f6; font-size: 14px; line-height: 1.7; }
-
-.tab-bar { position: fixed; z-index: 20; left: 50%; bottom: 0; display: grid; grid-template-columns: 1fr 1fr; width: 100%; max-width: 480px; padding: 8px 22px calc(8px + env(safe-area-inset-bottom)); border-top: 1px solid var(--line); background: rgba(255,255,255,.96); transform: translateX(-50%); }
-.tab { display: grid; justify-items: center; gap: 4px; padding: 6px; border: 0; color: #89959c; background: transparent; font-size: 12px; cursor: pointer; }
-.tab.active { color: var(--brand); }
+.tab-bar { position: fixed; z-index: 20; left: 50%; bottom: 0; display: grid; grid-template-columns: repeat(4, 1fr); width: 100%; max-width: 480px; padding: 8px 10px calc(8px + env(safe-area-inset-bottom)); border-top: 1px solid var(--line); background: rgba(255,255,255,.96); transform: translateX(-50%); }
+.tab { display: grid; justify-items: center; gap: 4px; padding: 6px 2px; border: 0; color: #89959c; background: transparent; font-size: 12px; cursor: pointer; }
+.tab.water.active { color: var(--water); }
+.tab.coffee.active { color: var(--coffee); }
+.tab.tea.active { color: var(--tea); }
+.tab.calendar.active { color: var(--brand); }
 .tab-icon { display: block; width: 22px; height: 22px; }
-.today-icon { border: 3px solid currentColor; border-radius: 45% 45% 50% 50%; clip-path: polygon(0 20%,100% 20%,92% 100%,8% 100%); }
+.cup-icon { border: 3px solid currentColor; border-radius: 45% 45% 50% 50%; clip-path: polygon(0 20%,100% 20%,92% 100%,8% 100%); }
 .calendar-icon { position: relative; border: 3px solid currentColor; border-radius: 5px; }
-.calendar-icon::after { content:''; position:absolute; left:0; right:0; top:4px; border-top:3px solid currentColor; }
-
+.calendar-icon::after { content: ''; position: absolute; left: 0; right: 0; top: 4px; border-top: 3px solid currentColor; }
+@media (max-width: 360px) { .category-heading span { display: none; } }
 @media (max-height: 700px) {
   .app-shell { padding-top: 13px; }
-  .glass-area { margin-top: 8px; }
-  .glass-wrap { width: 145px; }
-  .drink-actions { margin-top: 15px; }
-  .drink-button { min-height: 70px; }
+  .category-heading { margin-top: 14px; }
+  .cup-item .glass { width: min(100%, 140px); }
+  .drink-button { min-height: 66px; margin-top: 14px; }
 }
 @media (min-width: 481px) { .app-shell { box-shadow: 0 0 30px rgba(31,53,64,.12); } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }

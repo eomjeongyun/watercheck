@@ -16,64 +16,14 @@
 </head>
 <body>
   <main class="app-shell">
-    <section id="today-screen" class="screen active" aria-labelledby="app-title">
-      <header class="top-header">
-        <div>
-          <h1 id="app-title">WaterCheck</h1>
-          <p id="today-date" class="today-date"></p>
-        </div>
-        <div class="brand-drop" aria-hidden="true"></div>
-      </header>
-
-      <section class="glass-area" aria-label="오늘의 텀블러 기록">
-        <div class="glass-wrap">
-          <svg class="glass" viewBox="0 0 180 276" role="img" aria-labelledby="glass-title glass-desc">
-            <title id="glass-title">500밀리리터 텀블러</title>
-            <desc id="glass-desc">한 번 기록할 때마다 아래부터 125밀리리터씩 채워집니다.</desc>
-            <defs>
-              <clipPath id="glass-clip">
-                <path d="M30 27 L42 247 Q44 260 58 262 H122 Q136 260 138 247 L150 27 Z"/>
-              </clipPath>
-            </defs>
-            <g id="fill-segments" clip-path="url(#glass-clip)">
-              <rect data-segment="3" class="fill-segment" x="30" y="27" width="120" height="55"/>
-              <rect data-segment="2" class="fill-segment" x="30" y="82" width="120" height="55"/>
-              <rect data-segment="1" class="fill-segment" x="30" y="137" width="120" height="55"/>
-              <rect data-segment="0" class="fill-segment" x="30" y="192" width="120" height="70"/>
-            </g>
-            <path class="glass-body" d="M30 27 L42 247 Q44 260 58 262 H122 Q136 260 138 247 L150 27"/>
-            <path class="glass-rim" d="M25 27 Q25 17 37 17 H143 Q155 17 155 27 Q155 37 143 37 H37 Q25 37 25 27 Z"/>
-            <path class="glass-shine" d="M48 52 L57 219"/>
-            <path class="glass-base" d="M53 262 H127"/>
-          </svg>
-          <span class="quarter-label">125ml × 4</span>
-        </div>
-
-        <div class="totals" aria-live="polite">
-          <div id="category-totals" class="category-totals"></div>
-          <div class="goal-line">
-            <span>물+차</span>
-            <strong id="goal-total">0ml / 2000ml</strong>
-          </div>
-          <div class="goal-track" aria-hidden="true"><div id="goal-progress"></div></div>
-        </div>
-      </section>
-
-      <section class="drink-actions" aria-label="음료 기록">
-        <button class="drink-button water" data-category="water" type="button"><span>물</span><small>+125ml</small></button>
-        <button class="drink-button coffee" data-category="coffee" type="button"><span>커피</span><small>+125ml</small></button>
-        <button class="drink-button tea" data-category="tea" type="button"><span>차</span><small>+125ml</small></button>
-      </section>
-      <button id="undo-button" class="undo-button" type="button" disabled>실수로 눌렀어요</button>
-    </section>
+    <div id="category-screens"></div>
 
     <section id="calendar-screen" class="screen" aria-labelledby="calendar-title" hidden>
       <header class="calendar-header">
         <div>
-          <p class="eyebrow">나의 물 기록</p>
+          <p class="eyebrow">나의 음료 기록</p>
           <h2 id="calendar-title">달력</h2>
         </div>
-        <div class="brand-drop small" aria-hidden="true"></div>
       </header>
       <div class="month-nav">
         <button id="prev-month" type="button" aria-label="이전 달">이전</button>
@@ -90,8 +40,10 @@
   </main>
 
   <nav class="tab-bar" aria-label="주요 메뉴">
-    <button class="tab active" data-screen="today" type="button"><span class="tab-icon today-icon" aria-hidden="true"></span><span>오늘</span></button>
-    <button class="tab" data-screen="calendar" type="button"><span class="tab-icon calendar-icon" aria-hidden="true"></span><span>달력</span></button>
+    <button class="tab water active" data-screen="water" type="button"><span class="tab-icon cup-icon" aria-hidden="true"></span><span>물</span></button>
+    <button class="tab coffee" data-screen="coffee" type="button"><span class="tab-icon cup-icon" aria-hidden="true"></span><span>커피</span></button>
+    <button class="tab tea" data-screen="tea" type="button"><span class="tab-icon cup-icon" aria-hidden="true"></span><span>차</span></button>
+    <button class="tab calendar" data-screen="calendar" type="button"><span class="tab-icon calendar-icon" aria-hidden="true"></span><span>달력</span></button>
   </nav>
   <script src="./app.js" defer></script>
 </body>
